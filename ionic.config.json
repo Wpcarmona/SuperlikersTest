@@ -1,0 +1,7 @@
+{
+  "name": "superlikertest",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
