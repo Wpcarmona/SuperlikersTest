@@ -16,8 +16,7 @@ export class HeaderComponent implements OnInit {
 
   async ngOnInit() {
     const deviceType = await this.deviceService.checkDeviceType();
-    console.log(deviceType)
-    if (deviceType == "unknown") {
+    if (deviceType == "iosnotch") {
       this.headerClass = 'profile-header-notch';
     }
   }
