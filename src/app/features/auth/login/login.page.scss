@@ -69,6 +69,11 @@ ion-content {
   input::placeholder{
     color: #446cbc;
   }
+
+  input:focus{
+    outline: none;
+    border: 2px solid #254589;
+  }
   
   .show-password {
     position: absolute;
@@ -181,6 +186,21 @@ ion-content {
     filter: blur(0.5px);
 }
   
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    margin-top: 14px;
+    filter: invert(45%) sepia(100%) saturate(1000%) hue-rotate(190deg) brightness(90%) contrast(90%);
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
   
 
   
