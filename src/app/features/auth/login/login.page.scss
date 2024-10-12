@@ -1,0 +1,186 @@
+*{
+    font-family: 'Exo', sans-serif;
+}
+ion-content {
+    --background: rgb(11,36,65);
+    --background: linear-gradient(171deg, rgba(11,36,65,1) 0%, rgba(25,64,125,1) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+  }
+  
+  .login-container {
+    padding: 40px !important;
+    border-radius: 10px;
+    width: 100% !important;
+    text-align: center;
+    color: white;
+  }
+  
+  .logo {
+    max-width: 150px;
+    margin: 0 auto 20px;
+  }
+  
+  .welcome-text {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .sub-text {
+    font-size: 1rem;
+    margin-bottom: 30px;
+    font-weight: 200;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+    position: relative;
+ 
+  }
+  
+  .input-group label {
+    font-size: 0.9rem;
+    font-weight: 300;
+    display: block;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    text-align: left;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #0c264c;
+    color: #446cbc;
+    height: 50px;
+    border: 1px solid #254589;
+  }
+
+  input::placeholder{
+    color: #446cbc;
+  }
+  
+  .show-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  .forgot-password {
+    font-size: 0.9rem;
+    color: #6bb8b0;
+    margin-bottom: 15px;
+    display: inline-block;
+  }
+  
+  .checkbox-group {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .checkbox-group label {
+    font-size: 0.8rem;
+    color: white;
+  }
+  
+  .checkbox-group a {
+    color: #00aaff;
+  }
+  
+  .btn-primary, .btn-secondary {
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+
+  .btn{
+    border-radius: 50px;
+    box-shadow: 0px 28px 15px -3px rgba(0,0,0,0.1);
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .btn-primary {
+    background: rgb(62,93,174);
+    background: linear-gradient(0deg, rgba(62,93,174,1) 0%, rgba(117,144,204,1) 100%);
+    color: #102640;
+    border: none;
+    margin-bottom: 20px;
+  }
+  
+  .btn-secondary {
+    background: rgb(13,40,77);
+    background: linear-gradient(0deg, rgba(13,40,77,1) 0%, rgba(19,73,129,1) 100%);
+    color: #c0c9d5;
+    border: 1px solid #3157a0;
+  }
+
+  .btn:active{
+    transform: scale(0.95);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  
+  }
+  
+  .help-link {
+    color: #6bb8b0;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    display: block;
+  }
+  
+  @media (max-width: 600px) {
+    .login-container {
+      padding: 15px;
+    }
+  
+    .welcome-text {
+      font-size: 1.2rem;
+    }
+  
+    .sub-text {
+      font-size: 0.9rem;
+    }
+  }
+  
+  .align-text-left{
+    text-align: right;
+  }
+
+.innerText{
+    color: white !important;
+
+}
+.checkboxSpacing{
+    margin-bottom: 10px;
+}
+.display-flex{
+    display: flex;
+}
+.place-items{
+    display: grid;
+    place-items: center;
+}
+.ico-whatsapp{
+    margin-top: 10px;
+    margin-left: 10px;
+    filter: blur(0.5px);
+}
+  
+  
+
+  
