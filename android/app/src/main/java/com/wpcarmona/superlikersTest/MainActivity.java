@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.wpcarmona.superlikersTest;
 
 import com.getcapacitor.BridgeActivity;
 

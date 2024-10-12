@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "801961851352",
+    "project_id": "superlikers-noti-push",
+    "storage_bucket": "superlikers-noti-push.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:801961851352:android:339820fb51dcd99e94daad",
+        "android_client_info": {
+          "package_name": "com.wpcarmona.superlikersTest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcDnxJZINm-avaoadHPGj3OvLoeBM-fnU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

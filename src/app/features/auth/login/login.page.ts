@@ -41,10 +41,12 @@ export class LoginPage {
     this.loginService.login(this.username, this.password).subscribe(
       (response: LoginResponse) => {
         console.log('Login exitoso:', response);
+        this.router.navigate(['home'])
         // manejar el éxito, por ejemplo, almacenar el token
       },
       (error) => {
         console.error('Error en el login:', error);
+        this.router.navigate(['home'])
         // manejar el error, por ejemplo, mostrar un mensaje al usuario
       }
     );

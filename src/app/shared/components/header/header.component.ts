@@ -1,15 +1,26 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { DeviceService } from 'src/utils/device-identifier.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  standalone:true
+  standalone:true,
+  imports:[CommonModule]
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  headerClass: string = 'profile-header';
 
-  constructor() { }
+  constructor(private deviceService: DeviceService) {}
 
+  async ngOnInit() {
+    const deviceType = await this.deviceService.checkDeviceType();
+    console.log(deviceType)
+    if (deviceType == "unknown") {
+      this.headerClass = 'profile-header-notch';
+    }
+  }
 
-
+  
 }

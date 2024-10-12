@@ -7,6 +7,16 @@
     background: linear-gradient(0deg, rgba(103,128,190,1) 0%, rgba(58,92,171,1) 100%);
   }
 
+  .profile-header-notch {
+    padding-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0 0 20px 20px;
+    background: rgb(103,128,190);
+    background: linear-gradient(0deg, rgba(103,128,190,1) 0%, rgba(58,92,171,1) 100%);
+  }
+
   .user-info {
     margin-left: 20px;
   }
