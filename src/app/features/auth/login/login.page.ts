@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon } from '@ionic/angular/standalone';
 import { LoginService } from 'src/app/core/services/auth/login.service';
 import { Router } from '@angular/router';
+import { LoginResponse } from 'src/app/models/login.model';
 
 
 @Component({
@@ -37,15 +38,15 @@ export class LoginPage {
   }
 
   login() {
-    this.loginService.login(this.username, this.password)
-      .then(response => {
-        console.log('Respuesta del servicio:', response);
-        this.router.navigate(['home'])
-        // Aquí puedes manejar la respuesta, como guardar el token
-      })
-      .catch(error => {
-        console.error('Error al iniciar sesión:', error);
-        // Aquí puedes manejar el error, como mostrar un mensaje al usuario
-      });
+    this.loginService.login(this.username, this.password).subscribe(
+      (response: LoginResponse) => {
+        console.log('Login exitoso:', response);
+        // manejar el éxito, por ejemplo, almacenar el token
+      },
+      (error) => {
+        console.error('Error en el login:', error);
+        // manejar el error, por ejemplo, mostrar un mensaje al usuario
+      }
+    );
   }
 }

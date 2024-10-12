@@ -1,28 +1,30 @@
 <ion-content>
   <div class="profile-container">
-    <div class="profile-header">
-      <div class="user-info">
-        <h3>Gerson Joel Camacho</h3>
-        <p>Cod. Modelo: <span>102100101</span></p>
-        <p>Modelorama: <span>Nuevo León</span></p>
-      </div>
-      <img src="mpg-logo.png" alt="MPG Logo" class="mpg-logo">
-    </div>
+    <app-header />
 
-    <div class="banner">
-      <img src="club-banner.png" alt="Bees Club Black Modelorama" class="banner-img">
-    </div>
+    <app-banner-content img="banner.svg" />
 
-    <div class="tab-container">
-      <button class="tab-button active">Resumen</button>
-      <button class="tab-button">Autoejecución</button>
-      <button class="tab-button">Radiografía</button>
-    </div>
+    <app-tabs-content />
 
     <div class="goals-section">
-      <h4>Metas por volumen</h4>
-      <p>Estas son las principales metas por volumen que debes cumplir al mes.</p>
-      <p>A medida que avanzas en cada una, vas sumando al porcentaje de cumplimiento total para obtener tu bonificación.</p>
+      <div class="align-left">
+        <div>
+          <h5>Metas por volumen</h5>
+        </div>
+        <div>
+          <strong
+            >Estas son las principales metas por volumen que debes cumplir al
+            mes.</strong
+          >
+          <br />
+          <div class="margin-top">
+            <label
+              >A medida que avanzas en cada una, vas sumando al porcentaje de
+              cumplimiento total para obtener tu bonificación.</label
+            >
+          </div>
+        </div>
+      </div>
 
       <div class="progress-bar">
         <div class="progress" style="width: 40%"></div>
@@ -30,37 +32,43 @@
         <span class="progress-right">100%</span>
       </div>
 
-      <div class="filter-section">
-        <label for="filter">Filtrar por:</label>
-        <select id="filter">
-          <option value="cartones">Cartones</option>
-        </select>
+      <div class="align-right">
+        <div class="filter-section">
+          <label for="filter">Filtrar por:</label>
+          <select id="filter">
+            <option value="cartones" class="option-label">Cartones</option>
+          </select>
+        </div>
       </div>
 
       <div class="progress-circles">
-        <div class="circle">
-          <span>67%</span>
-          <p>Volumen</p>
+        <div class="flex-direction">
+          <div class="circle">
+            <span>67%</span>
+          </div>
+          <label>Volumen</label>
         </div>
-        <div class="circle">
-          <span>75%</span>
-          <p>Volumen Retornable</p>
+        <div class="flex-direction">
+          <div class="circle">
+            <span>75%</span>
+          </div>
+          <label>Volumen Retornable</label>
         </div>
-        <div class="circle">
-          <span>50%</span>
-          <p>Above Core + Beyond Beer</p>
+        <div class="flex-direction">
+          <div class="circle">
+            <span>50%</span>
+          </div>
+          <label>Above Core + Beyond Beer</label>
         </div>
-        <div class="circle">
-          <span>37%</span>
-          <p>Marketplace</p>
+        <div class="flex-direction">
+          <div class="circle">
+            <span>37%</span>
+          </div>
+          <label>Marketplace</label>
         </div>
       </div>
     </div>
-
-    <div class="footer">
-      <button class="footer-button">Bonificación</button>
-      <button class="footer-button active">Resumen</button>
-      <button class="footer-button">Autoejecución</button>
-    </div>
   </div>
 </ion-content>
+
+<app-footer-tab />

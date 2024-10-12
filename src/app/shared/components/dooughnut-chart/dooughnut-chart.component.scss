@@ -1,0 +1,256 @@
+.donut {
+    position: relative;
+    width: 200px;
+    height: 200px;
+  }
+  .donut {
+    position: relative;
+    width: 200px;
+    height: 200px;
+  }
+  
+  .donut-default {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+  
+  .donut-white {
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+    background: #fff;
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+  
+  .donut-line {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .donut-text {
+    top: 25px;
+    left: 25px;
+    width: 150px;
+    height: 150px;
+    background: #fff;
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+  }
+  
+  .donut-text span {
+    color: #48b2c1;
+  }
+  
+  /* ============ instalment 1 ==========*/
+  
+  .instalment1 .donut-case {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #48b2c1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-clip: border-box;
+    overflow: hidden;
+  }
+  
+  .instalment1 .donut-case::before {
+    content: "";
+    clip: rect(0 200px 100px 0);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(180deg);
+    background: #cbcb41;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .instalment1 .donut-case::after {
+    content: "";
+    clip: rect(0 100px 200px 0);
+    -webkit-transform: rotate(327.6deg);
+    transform: rotate(360deg);
+    background: #cbcb41;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .instalment1 .donut-line::before {
+    content: "";
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    background: #fff;
+    z-index: 2;
+  }
+  
+  .instalment1 .donut-line::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    left: 25px;
+    background: #fff;
+    border-bottom: 1px solid #fff;
+    z-index: 2;
+  }
+  
+  /* ============ instalment 2 ==========*/
+  
+  .instalment2 .donut-case {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #48b2c1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-clip: border-box;
+    overflow: hidden;
+  }
+  
+  .instalment2 .donut-case::before {
+    content: "";
+    clip: rect(0 200px 100px 0);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(180deg);
+    background: #f00;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .instalment2 .donut-case::after {
+    content: "";
+    clip: rect(0 100px 200px 0);
+    -webkit-transform: rotate(327.6deg);
+    transform: rotate(360deg);
+    background: #cbcb41;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .instalment2 .donut-line::before {
+    content: "";
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    background: #fff;
+    z-index: 2;
+  }
+  
+  .instalment2 .donut-line::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    left: 25px;
+    background: #fff;
+    border-bottom: 1px solid #fff;
+    z-index: 2;
+  }
+  
+  /* ============ instalment 3 ==========*/
+  
+  .instalment3 .donut-case {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #cbcb41;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-clip: border-box;
+    overflow: hidden;
+  }
+  
+  .instalment3 .donut-case::before {
+    content: "";
+    clip: rect(0 100px 200px 0);
+    -webkit-transform: rotate(327.6deg);
+    transform: rotate(180deg);
+    background: #48b2c1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .instalment3 .donut-case::after {
+    content: "";
+    clip: rect(0 100px 200px 0);
+    -webkit-transform: rotate(327.6deg);
+    transform: rotate(270deg);
+    background: #48b2c1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .instalment3 .donut-line::before {
+    content: "";
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    background: #fff;
+    z-index: 2;
+  }
+  
+  .instalment3 .donut-line::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    left: -25px;
+    background: #fff;
+    border-bottom: 1px solid #fff;
+    z-index: 2;
+  }
+  
+  .instalment4 .donut-case {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #48b2c1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-clip: border-box;
+    overflow: hidden;
+  }
+  
