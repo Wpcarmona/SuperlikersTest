@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoginResponse } from 'src/app/models/login.model';
+import { LoginResponse, SignupInfoResponse } from 'src/app/models/login.model';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
   private readonly apiUrl = `${environment.BASE_URL}/v1/microsite/sessions`;
+  private readonly infoUrl = `${environment.BASE_URL}/v1/forms/signup/info?`
 
   constructor(private http: HttpClient) {}
 
@@ -27,5 +28,17 @@ export class LoginService {
     });
 
     return this.http.post<LoginResponse>(this.apiUrl, data, { headers });
+  }
+  signupInfo(): Observable<SignupInfoResponse> {
+    const data = {
+      api_key: 'fe7f60bab39cd8b46cc414d28adf7fff',
+      campaign: '4u'
+    };
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<SignupInfoResponse>(this.infoUrl, data, { headers });
   }
 }

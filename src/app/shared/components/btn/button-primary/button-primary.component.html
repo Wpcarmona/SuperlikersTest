@@ -1,0 +1,7 @@
+<button 
+  [type]="type" 
+  [class]="isDisabled ? 'btn btn-disabled' : buttonClass" 
+  [disabled]="isDisabled" 
+  (click)="handleClick()">
+  {{ buttonText }}
+</button>

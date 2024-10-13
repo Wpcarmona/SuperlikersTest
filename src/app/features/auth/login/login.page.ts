@@ -4,8 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonCheckbox } from '@ionic/angular/standalone';
 import { LoginService } from 'src/app/core/services/auth/login.service';
 import { Router } from '@angular/router';
-import { LoginResponse } from 'src/app/models/login.model';
+import { LoginResponse, SignupInfoResponse } from 'src/app/models/login.model';
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
+import { ButtonPrimaryComponent } from "../../../shared/components/btn/button-primary/button-primary.component";
 
 
 @Component({
@@ -13,9 +14,9 @@ import { LoaderComponent } from 'src/app/shared/components/loader/loader.compone
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonCheckbox, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, LoaderComponent]
+  imports: [IonCheckbox, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, LoaderComponent, ButtonPrimaryComponent]
 })
-export class LoginPage {
+export class LoginPage implements OnInit{
 
   isPasswordVisible: boolean = false;
   username: string= '' ;
@@ -26,6 +27,9 @@ export class LoginPage {
     private loginService:LoginService,
     private router:Router
   ) { }
+  ngOnInit(): void {
+    this.callInfoLogin()
+  }
 
   togglePasswordVisibility(): void {
     this.isPasswordVisible = !this.isPasswordVisible;
@@ -37,6 +41,18 @@ export class LoginPage {
 
   get isFormValid(): boolean {
     return this.isPasswordValid;
+  }
+
+
+  callInfoLogin(){
+    this.loginService.signupInfo().subscribe({
+      next: (response: SignupInfoResponse) => {
+        console.log('Respuesta del servicio signupInfo:', response);
+      },
+      error: (error) => {
+        console.error('Error al llamar el servicio signupInfo:', error);
+      }
+    });
   }
 
   login() {

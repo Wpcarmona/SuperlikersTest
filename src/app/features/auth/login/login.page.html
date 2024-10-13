@@ -38,8 +38,19 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary" [disabled]="!isFormValid" (click)="login()">Iniciar sesión</button>
-      <button type="button" class="btn btn-secondary">Entrar como supervisor</button>
+      <app-button-primary
+      [buttonText]="'Iniciar sesión'"
+      [isDisabled]="!isFormValid"
+      [buttonClass]="'btn btn-primary'"
+      [type]="'submit'"
+      (onClick)="login()"
+      (Click)="login()"/>
+      <app-button-primary
+      [buttonText]="'Entrar como supervisor'"
+      [buttonClass]="'btn btn-secondary'"
+      [type]="'button'"
+      />
+
     </form>
 
     <div class="place-items">

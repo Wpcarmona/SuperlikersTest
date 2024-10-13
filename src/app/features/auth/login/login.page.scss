@@ -106,44 +106,7 @@ ion-content {
   .checkbox-group a {
     color: #00aaff;
   }
-  
-  .btn-primary, .btn-secondary {
-    padding: 10px 20px;
-    border-radius: 5px;
-    width: 100%;
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
-
-  .btn{
-    border-radius: 50px;
-    box-shadow: 0px 28px 15px -3px rgba(0,0,0,0.1);
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .btn-primary {
-    background: rgb(62,93,174);
-    background: linear-gradient(0deg, rgba(62,93,174,1) 0%, rgba(117,144,204,1) 100%);
-    color: #102640;
-    border: none;
-    margin-bottom: 20px;
-  }
-  
-  .btn-secondary {
-    background: rgb(13,40,77);
-    background: linear-gradient(0deg, rgba(13,40,77,1) 0%, rgba(19,73,129,1) 100%);
-    color: #c0c9d5;
-    border: 1px solid #3157a0;
-  }
-
-  .btn:active{
-    transform: scale(0.95);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  
-  }
-  
+    
   .help-link {
     color: #6bb8b0;
     font-style: italic; 
