@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/core/services/auth/login.service';
 import { DeviceService } from 'src/utils/device-identifier.service';
 
 @Component({
@@ -12,13 +14,25 @@ import { DeviceService } from 'src/utils/device-identifier.service';
 export class HeaderComponent implements OnInit {
   headerClass: string = 'profile-header';
 
-  constructor(private deviceService: DeviceService) {}
+  @Input() name:string = ''
+  @Input() code:string = ''
+
+  constructor(
+    private deviceService: DeviceService,
+    private authServies: LoginService,
+    private router:Router
+  ) {}
 
   async ngOnInit() {
     const deviceType = await this.deviceService.checkDeviceType();
     if (deviceType == "iosnotch") {
       this.headerClass = 'profile-header-notch';
     }
+  }
+
+  logout(){
+    this.authServies.logout()
+    this.router.navigate(['login'])
   }
 
   

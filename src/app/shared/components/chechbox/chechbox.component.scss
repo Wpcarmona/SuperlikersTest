@@ -1,0 +1,39 @@
+ion-checkbox {
+    --size: 18px;
+    --checkbox-background-checked: #7795d3;
+    --checkbox-background:#7795d3
+  }
+  
+  ion-checkbox::part(container) {
+    border-radius: 3px;
+    padding: 2px;
+    border: none
+  }
+
+  .container-check{
+    display: flex;
+    align-items: center;  
+    margin-bottom: 10px;
+  }
+
+  .label-check{
+    font-size: 13px;
+    margin-left: 5px;
+  }
+
+  .checkbox-group {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .checkbox-group label {
+    font-style: italic;
+    font-size: 0.8rem;
+    color: white;
+  }
+  
+  .checkbox-group a {
+    font-style: italic; 
+    font-weight: bold;
+    color: white;
+  }

@@ -1,11 +1,16 @@
 <!-- header.component.html -->
 <div [ngClass]="headerClass">
   <div class="display-flex">
-    <img src="../../../assets/menu.svg" alt="MPG Logo" class="menu-logo">
+    <img src="../../../assets/menu.svg" alt="MPG Logo" class="menu-logo" (click)="logout()">
     <div class="user-info">
-      <h3>Gerson Joel Camacho</h3>
-      <p>Cod. Modelo: <span>102100101</span></p>
-      <p>Modelorama: <span>Nuevo León</span></p>
+      <h3>{{name}}</h3>
+      <p>Cod. Modelo: <span>{{code}}</span></p>
+      <div class="custom-select">
+        <span class="label-text">Modelorama:</span>
+        <select>
+          <option value="nuevo-leon" selected>Nuevo León</option>
+        </select>
+      </div>      
     </div>
   </div>
   <img src="../../../assets/logo-secundario.png" alt="MPG Logo" class="mpg-logo">

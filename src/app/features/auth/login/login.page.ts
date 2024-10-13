@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { LoginResponse, SignupInfoResponse } from 'src/app/models/login.model';
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 import { ButtonPrimaryComponent } from "../../../shared/components/btn/button-primary/button-primary.component";
+import { ChechboxComponent } from "../../../shared/components/chechbox/chechbox.component";
 
 
 @Component({
@@ -14,7 +15,7 @@ import { ButtonPrimaryComponent } from "../../../shared/components/btn/button-pr
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonCheckbox, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, LoaderComponent, ButtonPrimaryComponent]
+  imports: [IonCheckbox, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, LoaderComponent, ButtonPrimaryComponent, ChechboxComponent]
 })
 export class LoginPage implements OnInit{
 
@@ -59,13 +60,17 @@ export class LoginPage implements OnInit{
     this.isLoading = true
     this.loginService.login(this.username, this.password).subscribe(
       (response: LoginResponse) => {
+        this.username = '' ;
+        this.password = '';
         console.log('Login exitoso:', response);
+        localStorage.setItem('isLogged', 'true');
         this.isLoading = false
         this.router.navigate(['home'])
         // manejar el éxito, por ejemplo, almacenar el token
       },
       (error) => {
         console.error('Error en el login:', error);
+        localStorage.setItem('isLogged', 'true');
         this.isLoading = false
         this.router.navigate(['home'])
         // manejar el error, por ejemplo, mostrar un mensaje al usuario
