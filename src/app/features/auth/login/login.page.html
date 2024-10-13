@@ -47,7 +47,16 @@
         <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
       </div>
 
-      <app-chechbox />
+      <div class="checkbox-group">
+        <div class="container-check">
+          <ion-checkbox checked="true"></ion-checkbox>
+          <div class="label-check">He leído y acepto <a href="#" class="innerText">Términos y Condiciones</a></div>
+        </div>
+        <div class="container-check">
+          <ion-checkbox></ion-checkbox>
+          <div class="label-check">He leído y acepto el <a href="#" class="innerText">Aviso de privacidad</a></div>
+        </div>
+      </div>
 
       <app-button-primary
         [buttonText]="'Iniciar sesión'"
