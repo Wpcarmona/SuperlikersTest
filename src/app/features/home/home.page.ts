@@ -10,6 +10,7 @@ import { DeviceService } from 'src/utils/device-identifier.service';
 import { SelectListComponent } from "../../shared/components/select-list/select-list.component";
 import { ProgresBarComponent } from "../../shared/components/progres-bar/progres-bar.component";
 import { DooughnutChartComponent } from "../../shared/components/dooughnut-chart/dooughnut-chart.component";
+import { LoaderComponent } from "../../shared/components/loader/loader.component";
 
 
 @Component({
@@ -28,7 +29,8 @@ import { DooughnutChartComponent } from "../../shared/components/dooughnut-chart
     BannerContentComponent,
     SelectListComponent,
     ProgresBarComponent,
-    DooughnutChartComponent
+    DooughnutChartComponent,
+    LoaderComponent
 ],
 })
 export class HomePage implements OnInit{
@@ -40,6 +42,7 @@ export class HomePage implements OnInit{
   percentaje2: number = 29;
   percentaje3: number = 46;
   percentaje4: number = 10;
+  isLoading:boolean = false
 
   constructor(
     private localNotification: ScheduleNotificationsService,

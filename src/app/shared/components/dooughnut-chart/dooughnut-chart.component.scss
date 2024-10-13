@@ -12,14 +12,19 @@
 }
 
 .progress-ring {
-  transform: rotate(-90deg); /* Rotamos para que empiece desde arriba */
+  transform: rotate(-90deg); 
 }
 
+.progress-ring__background {
+  stroke: #132d56; 
+}
+
+
 .progress-ring__circle {
-  stroke: #00c8ff; /* Cambia este color según el estado del progreso */
-  stroke-dasharray: 326; /* Circunferencia del círculo (2 * PI * radio) */
-  stroke-dashoffset: calc(326 - (67 / 100) * 326); /* Ajusta el porcentaje */
+  stroke-dasharray: 326;
   transition: stroke-dashoffset 0.5s ease;
+  stroke-linecap: round; 
+  filter: drop-shadow(0 0 7px 4px var(--progress-shadow-color));
 }
 
 .progress-text {
@@ -32,10 +37,6 @@
   font-weight: bold;
 }
 
-.percentage {
-  font-size: 24px;
-}
-
 .progress-label {
   margin-top: 10px;
   color: rgba(255, 255, 255, 0.7);
@@ -43,7 +44,7 @@
   text-align: center;
   white-space: pre-wrap;
   word-wrap: break-word;
-  max-width: 100px; /* Ajusta el tamaño según sea necesario */
+  max-width: 100px;
 }
 
 @media (max-width: 500px) {

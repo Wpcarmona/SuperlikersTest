@@ -65,9 +65,12 @@ ion-content {
 }
 
 .content-graph{
+  margin-top: 20px;
   display: flex;
   background-color: #0a253f;
   border-radius: 20px;
+  overflow-y: hidden;
+  padding: 10px;
 }
 
 .filter-section {

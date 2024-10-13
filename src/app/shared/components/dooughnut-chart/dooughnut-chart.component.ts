@@ -18,10 +18,16 @@ export class DooughnutChartComponent implements OnInit {
 
   ngOnInit(): void {
     this.setProgress(this.percentage);
+    this.setShadowColor();
   }
 
   setProgress(percentage: number): void {
     this.strokeDashoffset = this.circumference - (percentage / 100) * this.circumference;
+    
+  }
+
+  setShadowColor(): void {
+    document.documentElement.style.setProperty('--progress-shadow-color', this.color);
   }
 
 }
