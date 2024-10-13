@@ -1,7 +1,19 @@
-<div>instalment 3</div>
-    <div class="donut instalment3">
-      <div class="donut-default"></div>
-      <div class="donut-line"></div>
-      <div class="donut-text"></div>
-      <div class="donut-case"></div>
+<div class="circle-container">
+  <div class="progress-circle">
+    <svg class="progress-ring" width="120" height="120">
+      <circle class="progress-ring__background" stroke="white" stroke-width="8" fill="transparent" r="52" cx="60" cy="60" />
+      <circle class="progress-ring__circle"
+              [style.stroke]="color"
+              [style.stroke-dashoffset]="strokeDashoffset"
+              stroke-width="8" 
+              fill="transparent" 
+              r="52" 
+              cx="60" 
+              cy="60" />
+    </svg>
+    <div class="progress-text">
+      <span class="percentage">{{ percentage }}%</span>
+    </div>
+  </div>
+  <div class="progress-label">{{ label }}</div>
 </div>

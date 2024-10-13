@@ -26,47 +26,18 @@
         </div>
       </div>
 
-      <div class="progress-bar">
-        <div class="progress" style="width: 40%"></div>
-        <span class="progress-left">40%</span>
-        <span class="progress-right">100%</span>
-      </div>
+      <app-progres-bar [max]="max" [current]="current"/>
 
-      <div class="align-right">
-        <div class="filter-section">
-          <label for="filter">Filtrar por:</label>
-          <select id="filter">
-            <option value="cartones" class="option-label">Cartones</option>
-          </select>
-        </div>
-      </div>
 
-      <div class="progress-circles">
-        <div class="flex-direction">
-          <div class="circle">
-            <span>67%</span>
-          </div>
-          <label>Volumen</label>
+        <div class="align-right" >
+          <app-select-list (selectionChange)="onSelectionChange($event)"/>
         </div>
-        <div class="flex-direction">
-          <div class="circle">
-            <span>75%</span>
-          </div> 
-          <label>Volumen Retornable</label>
+        <div class="content-graph">
+          <app-dooughnut-chart [color]="'#6d8acf'" [label]="'Volumen'" [percentage]="percentaje1"/>
+          <app-dooughnut-chart [color]="'#9eebe2'" [label]="'Volumen Retornable'" [percentage]="percentaje2"/>
+          <app-dooughnut-chart [color]="'#ff716e'" [label]="'Above Core + Beyond Beer'" [percentage]="percentaje3"/>
+          <app-dooughnut-chart [color]="'#fbb200'" [label]="'Marketplace'" [percentage]="percentaje4"/>
         </div>
-        <div class="flex-direction">
-          <div class="circle">
-            <span>50%</span>
-          </div>
-          <label>Above Core + Beyond Beer</label>
-        </div>
-        <div class="flex-direction">
-          <div class="circle">
-            <span>37%</span>
-          </div>
-          <label>Marketplace</label>
-        </div>
-      </div>
     </div>
   </div>
 </ion-content>

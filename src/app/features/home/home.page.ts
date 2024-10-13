@@ -7,6 +7,9 @@ import { BannerContentComponent } from "../../shared/components/banner-content/b
 import { ScheduleNotificationsService } from 'src/app/core/utils/notification/notificationshedule/schedule-notifications.service';
 import { PushNotificationService } from 'src/app/core/utils/notification/pushNotification/push-notification.service';
 import { DeviceService } from 'src/utils/device-identifier.service';
+import { SelectListComponent } from "../../shared/components/select-list/select-list.component";
+import { ProgresBarComponent } from "../../shared/components/progres-bar/progres-bar.component";
+import { DooughnutChartComponent } from "../../shared/components/dooughnut-chart/dooughnut-chart.component";
 
 
 @Component({
@@ -22,11 +25,21 @@ import { DeviceService } from 'src/utils/device-identifier.service';
     FooterTabComponent,
     HeaderComponent,
     TabsContentComponent,
-    BannerContentComponent
+    BannerContentComponent,
+    SelectListComponent,
+    ProgresBarComponent,
+    DooughnutChartComponent
 ],
 })
 export class HomePage implements OnInit{
   selectedButtonIndex: number = 1;
+  selectedValue: string = 'Cartones';
+  max:number = 100
+  current:number = 40
+  percentaje1: number = 80;
+  percentaje2: number = 29;
+  percentaje3: number = 46;
+  percentaje4: number = 10;
 
   constructor(
     private localNotification: ScheduleNotificationsService,
@@ -44,19 +57,9 @@ export class HomePage implements OnInit{
     
   }
 
-  selectButtonFooter(event: Event, index: number) {
-    const buttons = document.querySelectorAll('.footer-button');
-    buttons.forEach((button) => button.classList.remove('active'));
-    const clickedButton = event.currentTarget as HTMLElement;
-    clickedButton.classList.add('active');
-    this.selectedButtonIndex = index;
+  onSelectionChange(value: string): void {
+    this.selectedValue = value; 
+    console.log('Valor seleccionado:', this.selectedValue); 
   }
 
-  selectButtonTab(event: Event, index: number) {
-    const buttons = document.querySelectorAll('.footer-button');
-    buttons.forEach((button) => button.classList.remove('active'));
-    const clickedButton = event.currentTarget as HTMLElement;
-    clickedButton.classList.add('active');
-    this.selectedButtonIndex = index;
-  }
 }

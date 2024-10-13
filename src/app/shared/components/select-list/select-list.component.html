@@ -1,0 +1,17 @@
+<div>
+  <label>Filtrar por: </label>
+  <label for="slct" class="select">
+    <select id="slct" required (change)="onSelectChange($event)"> 
+        <option value="Cartones" selected>Cartones</option>
+        <option value="Hectolitros">Hectolitros</option>
+    </select>
+    <svg>
+        <use xlink:href="#select-arrow-down"></use>
+    </svg>
+  </label>
+</div>
+<svg class="sprites" style="display: none;">
+  <symbol id="select-arrow-down" viewBox="0 0 10 6">
+      <polyline points="1 1 5 5 9 1"></polyline>
+  </symbol>
+</svg>
