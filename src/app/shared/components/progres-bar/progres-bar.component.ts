@@ -1,26 +1,35 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { HelperFunctionServices } from 'src/utils/helper-function.service';
 
 @Component({
   selector: 'app-progres-bar',
   templateUrl: './progres-bar.component.html',
   styleUrls: ['./progres-bar.component.scss'],
-  standalone:true
+  standalone: true
 })
-export class ProgresBarComponent {
+export class ProgresBarComponent implements OnInit {
 
   @Input() max: number = 100; 
   @Input() current: number = 40;
 
-  constructor() { }
+  actualPercent: number = 0;
+  progressWidth: string = '0%';  
+  circleWidth: string = 'calc(0% - 20px)'; 
 
-  get progressWidth(): string {
-    const percentage = (this.current / this.max) * 100;
-    return `${percentage}%`;
+  constructor(
+    private helperFunction: HelperFunctionServices
+  ) { }
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.updateProgress();
+    }, 100); 
   }
 
-  get circleWidth(): string {
-    const percentage = (this.current / this.max) * 100;
-    return `calc(${percentage}% - 20px)`;
+  updateProgress(): void {
+    const percentage = this.helperFunction.calcularPorcentaje(this.max, this.current);
+    this.actualPercent = percentage;
+    this.progressWidth = `${percentage}%`;
+    this.circleWidth = `calc(${percentage}% - 20px)`;  
   }
-
 }

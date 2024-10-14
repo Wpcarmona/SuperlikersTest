@@ -14,6 +14,8 @@
     height: 100%;
     border-radius: 10px;
     box-shadow: 0px 26px 15px -3px rgba(0,0,0,0.1);
+    width: 0%;
+    transition: width 1.5s ease-out;
   }
   
   .progress-left,
@@ -51,6 +53,7 @@
     font-weight: bold;
     font-size: 12px;
     box-shadow: 0px 26px 15px -3px rgba(0,0,0,0.1);
+   
   }
   
   .progress-circle-current {
@@ -70,4 +73,6 @@
     font-size: 12px; 
     box-shadow: 0px 26px 15px -3px rgba(0,0,0,0.1);
     z-index: 1;
+    left: 0%; /* Inicializamos la posición en 0 para la animación */
+    transition: left 1.5s ease-out;
   }

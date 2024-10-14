@@ -44,14 +44,16 @@ export class HomePage implements OnInit {
   selectedValue: string = 'Cartones';
   entriesCartones: NewEntry[] = [];
   entriesHectolitros: NewEntry[] =[];
-  max: number = 100;
-  current: number = 10;
+  progressBarMax: number = 100;
+  progressBarCurrent: number = 10;
   percentaje1: number = 80;
   percentaje2: number = 29;
   percentaje3: number = 46;
   percentaje4: number = 10;
   isLoading: boolean = false;
-
+  colors: string[] = ['#385cad', '#b1fdf3', '#ff8485', '#ff9015'];
+  color:string = "#385cad"
+  
   constructor(
     private localNotification: ScheduleNotificationsService,
     private pushNotification: PushNotificationService,
@@ -89,11 +91,33 @@ export class HomePage implements OnInit {
       avance: Number(item['avance']) || 0,
       meta: Number(item['meta']) || 0
     }));
+
+    this.progressBarMax = 0;
+    this.progressBarCurrent = 0;
+
+    // Calcular el total de metas (progressBarMax) y avances (progressBarCurrent)
+    this.entriesCartones.forEach(item => {
+      this.progressBarMax += item.meta;
+      this.progressBarCurrent += item.avance;
+    });
+
+    this.entriesHectolitros.forEach(item => {
+      this.progressBarMax += item.meta;
+      this.progressBarCurrent += item.avance;
+    });
+
+    console.log(this.progressBarCurrent, this.progressBarMax)
+
     } catch (error) {
       console.error('Error al consumir los datos:', error);
     }
   }
-  
+
+  getColor(index: number): string {
+    return this.colors[index % this.colors.length]; 
+  }
+
+ 
 
 
 }

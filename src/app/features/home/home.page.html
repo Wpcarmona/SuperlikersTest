@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <app-progres-bar [max]="max" [current]="current" />
+      <app-progres-bar [max]="progressBarMax" [current]="progressBarCurrent" />
 
       <div class="align-right">
         <app-select-list (selectionChange)="onSelectionChange($event)" />
@@ -39,6 +39,8 @@
             [label]="entriesCarton.name"
             [max]="entriesCarton.meta"
             [actual]="entriesCarton.avance"
+            [index]="$index"
+            [color]="getColor($index)"
           />
         </div>
         } } @else { @for (entriesHectolitro of entriesHectolitros; track $index)
@@ -48,6 +50,8 @@
             [label]="entriesHectolitro.name"
             [max]="entriesHectolitro.meta"
             [actual]="entriesHectolitro.avance"
+            [index]="$index"
+            [color]="getColor($index)"
           />
         </div>
         } }

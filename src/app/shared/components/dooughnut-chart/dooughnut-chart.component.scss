@@ -24,8 +24,8 @@
   stroke-dasharray: 326;
   transition: stroke-dashoffset 0.5s ease;
   stroke-linecap: round; 
-  // stroke: linear-gradient(#385cad 0%, #7894d2 100%);
   filter: drop-shadow(0px 2px 4px rgba(120, 148, 210, 0.6));
+  animation: progressFill 2s ease forwards;
 }
 //color de cada uno de los chart
 // [4:56 p. m., 13/10/2024] Camilo Redondo: background: linear-gradient(#385cad 0%, #7894d2 100%);
@@ -60,5 +60,14 @@
 @media (max-width: 500px) {
   .progress-label {
     font-size: 14px;
+  }
+}
+
+@keyframes progressFill {
+  from {
+    stroke-dashoffset: 326; 
+  }
+  to {
+    stroke-dashoffset: var(11);
   }
 }
