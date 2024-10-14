@@ -90,4 +90,5 @@ export class LoginPage {
   closeCard() {
     this.showErroCard = false;
   }
+  
 }

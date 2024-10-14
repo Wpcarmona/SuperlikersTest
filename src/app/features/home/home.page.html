@@ -2,7 +2,7 @@
   <div class="profile-container">
     <app-header [name]="'Gerson Joel Camacho'" [code]="'102100101'" />
 
-    <app-banner-content img="banner.svg" />
+    <app-banner-content img="bannerNew.png" />
 
     <app-tabs-content />
 
@@ -26,22 +26,36 @@
         </div>
       </div>
 
-      <app-progres-bar [max]="max" [current]="current"/>
+      <app-progres-bar [max]="max" [current]="current" />
 
-
-        <div class="align-right" >
-          <app-select-list (selectionChange)="onSelectionChange($event)"/>
+      <div class="align-right">
+        <app-select-list (selectionChange)="onSelectionChange($event)" />
+      </div>
+      <div class="content-graph">
+        @if(selectedValue === "Cartones"){ @for (entriesCarton of
+        entriesCartones; track $index) {
+        <div>
+          <app-dooughnut-chart
+            [label]="entriesCarton.name"
+            [max]="entriesCarton.meta"
+            [actual]="entriesCarton.avance"
+          />
         </div>
-        <div class="content-graph">
-          <app-dooughnut-chart [color]="'#6d8acf'" [label]="'Volumen'" [percentage]="percentaje1"/>
-          <app-dooughnut-chart [color]="'#9eebe2'" [label]="'Volumen Retornable'" [percentage]="percentaje2"/>
-          <app-dooughnut-chart [color]="'#ff716e'" [label]="'Above Core + Beyond Beer'" [percentage]="percentaje3"/>
-          <app-dooughnut-chart [color]="'#fbb200'" [label]="'Marketplace'" [percentage]="percentaje4"/>
+        } } @else { @for (entriesHectolitro of entriesHectolitros; track $index)
+        {
+        <div>
+          <app-dooughnut-chart
+            [label]="entriesHectolitro.name"
+            [max]="entriesHectolitro.meta"
+            [actual]="entriesHectolitro.avance"
+          />
         </div>
+        } }
+      </div>
     </div>
   </div>
 </ion-content>
 
 <app-footer-tab />
 
-<app-loader [isLoading]="isLoading"/>
+<app-loader [isLoading]="isLoading" />

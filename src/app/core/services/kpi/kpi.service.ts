@@ -1,32 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import axios, { AxiosError } from 'axios';
 import { Observable, of, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { EntriesRequest, EntriesResponse } from 'src/app/models/entries.model';
 import { DUMMY_ENTRIES_RESPONSE } from 'src/utils/dummys/entries.dummy';
 import { environment } from 'src/environments/environment';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class KpiService {
-
   private readonly apiUrl = `${environment.BASE_URL}/v1/entries/index`;
 
+  constructor() {}
 
-  constructor(private http: HttpClient) {}
-
- 
-  getEntries(
+  async getEntries(
     distinct_id: string,
-    isDummy:boolean = false,
-    dummyEmpty:boolean = false,
-    dummyError:boolean = false
-  ): Observable<EntriesResponse> {
+    isDummy: boolean = false,
+  ): Promise<Observable<EntriesResponse>> {
     if (isDummy) {
-    
-      return of (DUMMY_ENTRIES_RESPONSE);
+      return of(DUMMY_ENTRIES_RESPONSE);
     }
 
     const requestData: EntriesRequest = {
@@ -41,15 +33,20 @@ export class KpiService {
       atype: 'avance_metas'
     };
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-
-    return this.http.post<EntriesResponse>(this.apiUrl, requestData, { headers }).pipe(
-      catchError(error => {
-        console.error('Error fetching entries:', error);
-        return throwError(() => error);
+    return new Observable<EntriesResponse>((observer) => {
+      axios.post<EntriesResponse>(this.apiUrl, requestData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
-    );
+      .then(response => {
+        observer.next(response.data);
+        observer.complete();
+      })
+      .catch((error: AxiosError) => {
+        console.error('Error fetching entries:', error);
+        observer.error(error.response ? error.response.data : error);
+      });
+    });
   }
 }

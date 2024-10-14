@@ -16,6 +16,8 @@ import { SelectListComponent } from '../../shared/components/select-list/select-
 import { ProgresBarComponent } from '../../shared/components/progres-bar/progres-bar.component';
 import { DooughnutChartComponent } from '../../shared/components/dooughnut-chart/dooughnut-chart.component';
 import { LoaderComponent } from '../../shared/components/loader/loader.component';
+import { KpiModelService } from 'src/app/core/models/kpi/kpi.models';
+import {  NewEntry } from 'src/app/models/entries.model';
 
 @Component({
   selector: 'app-home',
@@ -40,6 +42,8 @@ import { LoaderComponent } from '../../shared/components/loader/loader.component
 export class HomePage implements OnInit {
   selectedButtonIndex: number = 1;
   selectedValue: string = 'Cartones';
+  entriesCartones: NewEntry[] = [];
+  entriesHectolitros: NewEntry[] =[];
   max: number = 100;
   current: number = 10;
   percentaje1: number = 80;
@@ -51,20 +55,45 @@ export class HomePage implements OnInit {
   constructor(
     private localNotification: ScheduleNotificationsService,
     private pushNotification: PushNotificationService,
-    private deviceService: DeviceService
+    private deviceService: DeviceService,
+    private modelKpiService: KpiModelService,
   ) {}
 
   async ngOnInit() {
+    this.fetchEntries()
     const isIOS = await this.deviceService.isIOS();
     if (isIOS) {
       this.localNotification.initializeNotifications();
     } else {
       this.pushNotification.initializePushNotificationsDoc();
     }
+    
   }
 
   onSelectionChange(value: string): void {
     this.selectedValue = value;
-    console.log('Valor seleccionado:', this.selectedValue);
   }
+
+
+  async fetchEntries() {
+    try {
+      const resultado = await this.modelKpiService.consumePrintProcessedData('12222222',true);
+      //  console.log('Resultado final:', resultado);
+      this.entriesCartones = resultado.data.cartones.map(item => ({
+        name: item.name, 
+        avance: Number(item['avance']) || 0, 
+        meta: Number(item['meta']) || 0      
+      }));
+     this.entriesHectolitros = resultado.data.hectolitros.map(item => ({
+      name: item.name, 
+      avance: Number(item['avance']) || 0,
+      meta: Number(item['meta']) || 0
+    }));
+    } catch (error) {
+      console.error('Error al consumir los datos:', error);
+    }
+  }
+  
+
+
 }
