@@ -85,4 +85,5 @@
     </div>
   </div>
   <app-loader [isLoading]="isLoading" />
+  <app-alert-card-view [message]="errorMessage" [showCard]="showErroCard" (closeCard)="closeCard()"/>
 </ion-content>

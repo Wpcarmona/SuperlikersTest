@@ -24,8 +24,18 @@
   stroke-dasharray: 326;
   transition: stroke-dashoffset 0.5s ease;
   stroke-linecap: round; 
-  filter: drop-shadow(0 0 7px 4px var(--progress-shadow-color));
+  // stroke: linear-gradient(#385cad 0%, #7894d2 100%);
+  filter: drop-shadow(0px 2px 4px rgba(120, 148, 210, 0.6));
 }
+//color de cada uno de los chart
+// [4:56 p. m., 13/10/2024] Camilo Redondo: background: linear-gradient(#385cad 0%, #7894d2 100%);
+// filter: drop-shadow(0px 2px 4px rgba(120, 148, 210, 0.6));
+// [4:57 p. m., 13/10/2024] Camilo Redondo: background: linear-gradient(#b1fdf3 0%, #65baaf 100%);
+// filter: drop-shadow(0px 2px 4px rgba(116, 194, 184, 0.6));
+// [4:57 p. m., 13/10/2024] Camilo Redondo: background: linear-gradient(#ff8485 0%, #ff595a 100%);
+// filter: drop-shadow(0px 2px 4px rgba(255, 89, 90, 0.6));
+// [4:58 p. m., 13/10/2024] Camilo Redondo: background: linear-gradient(#ff9015 0%, #ffc600 100%);
+// filter: drop-shadow(0px 2px 4px rgba(255, 198, 0, 0.6));
 
 .progress-text {
   position: absolute;

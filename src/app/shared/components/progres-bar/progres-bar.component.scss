@@ -9,11 +9,8 @@
   
   .progress {
     background: rgb(101, 161, 51);
-    background: linear-gradient(
-      0deg,
-      rgba(101, 161, 51, 1) 0%,
-      rgba(157, 246, 114, 1) 100%
-    );
+    background: #71ba1b;
+    filter: drop-shadow(0px 3px 6px #0a2440);
     height: 100%;
     border-radius: 10px;
     box-shadow: 0px 26px 15px -3px rgba(0,0,0,0.1);
@@ -42,12 +39,8 @@
     right: 0px;
     top: 50%;
     transform: translateY(-50%);
-    background: rgb(101, 161, 51);
-    background: linear-gradient(
-      0deg,
-      rgba(101, 161, 51, 1) 0%,
-      rgba(157, 246, 114, 1) 100%
-    );
+    background: #71ba1b;
+    filter: drop-shadow(0px 3px 6px #0a2440);
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -64,12 +57,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgb(101, 161, 51);
-    background: linear-gradient(
-      0deg,
-      rgba(101, 161, 51, 1) 0%,
-      rgba(157, 246, 114, 1) 100%
-    );
+    background: #71ba1b;
+    filter: drop-shadow(0px 3px 6px #0a2440);
     width: 40px;
     height: 40px;
     border-radius: 50%;

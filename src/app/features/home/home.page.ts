@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+} from '@ionic/angular/standalone';
 import { FooterTabComponent } from 'src/app/shared/components/footer-tab/footer-tab.component';
-import { HeaderComponent } from "../../shared/components/header/header.component";
+import { HeaderComponent } from '../../shared/components/header/header.component';
 import { TabsContentComponent } from 'src/app/shared/components/tabs-content/tabs-content.component';
-import { BannerContentComponent } from "../../shared/components/banner-content/banner-content.component";
+import { BannerContentComponent } from '../../shared/components/banner-content/banner-content.component';
 import { ScheduleNotificationsService } from 'src/app/core/utils/notification/notificationshedule/schedule-notifications.service';
 import { PushNotificationService } from 'src/app/core/utils/notification/pushNotification/push-notification.service';
 import { DeviceService } from 'src/utils/device-identifier.service';
-import { SelectListComponent } from "../../shared/components/select-list/select-list.component";
-import { ProgresBarComponent } from "../../shared/components/progres-bar/progres-bar.component";
-import { DooughnutChartComponent } from "../../shared/components/dooughnut-chart/dooughnut-chart.component";
-import { LoaderComponent } from "../../shared/components/loader/loader.component";
-
+import { SelectListComponent } from '../../shared/components/select-list/select-list.component';
+import { ProgresBarComponent } from '../../shared/components/progres-bar/progres-bar.component';
+import { DooughnutChartComponent } from '../../shared/components/dooughnut-chart/dooughnut-chart.component';
+import { LoaderComponent } from '../../shared/components/loader/loader.component';
 
 @Component({
   selector: 'app-home',
@@ -30,39 +34,37 @@ import { LoaderComponent } from "../../shared/components/loader/loader.component
     SelectListComponent,
     ProgresBarComponent,
     DooughnutChartComponent,
-    LoaderComponent
-],
+    LoaderComponent,
+  ],
 })
-export class HomePage implements OnInit{
+export class HomePage implements OnInit {
   selectedButtonIndex: number = 1;
   selectedValue: string = 'Cartones';
-  max:number = 100
-  current:number = 40
+  max: number = 100;
+  current: number = 10;
   percentaje1: number = 80;
   percentaje2: number = 29;
   percentaje3: number = 46;
   percentaje4: number = 10;
-  isLoading:boolean = false
+  isLoading: boolean = false;
 
   constructor(
     private localNotification: ScheduleNotificationsService,
-    private pushNotification:PushNotificationService,
+    private pushNotification: PushNotificationService,
     private deviceService: DeviceService
   ) {}
 
   async ngOnInit() {
-    const isIOS = await this.deviceService.isIOS()
-    if(isIOS){
+    const isIOS = await this.deviceService.isIOS();
+    if (isIOS) {
       this.localNotification.initializeNotifications();
-    }else{
+    } else {
       this.pushNotification.initializePushNotificationsDoc();
     }
-    
   }
 
   onSelectionChange(value: string): void {
-    this.selectedValue = value; 
-    console.log('Valor seleccionado:', this.selectedValue); 
+    this.selectedValue = value;
+    console.log('Valor seleccionado:', this.selectedValue);
   }
-
 }

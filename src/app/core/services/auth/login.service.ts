@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginResponse, SignupInfoResponse } from 'src/app/models/login.model';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { DUMMY_LOGIN_ERROR_RESPONSE, DUMMY_LOGIN_RESPONSE } from 'src/utils/dummys/auth.dummy';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,21 @@ import { Observable } from 'rxjs';
 export class LoginService {
   private readonly apiUrl = `${environment.BASE_URL}/v1/microsite/sessions`;
   private readonly infoUrl = `${environment.BASE_URL}/v1/forms/signup/info?`;
-  public isLogged = false
+  
   
 
   constructor(private http: HttpClient) {}
 
 
-  login(codigoCliente: string, password: string): Observable<LoginResponse> {
+  login(codigoCliente: string, password: string, isDummy: boolean = false, simulateError: boolean = false): Observable<LoginResponse> {
+    if (isDummy) {
+        if (simulateError) {
+            
+            return throwError(() => ({ status: 404, error: DUMMY_LOGIN_ERROR_RESPONSE }));
+        }
+        
+        return of(DUMMY_LOGIN_RESPONSE);
+    }
     const data = {
       campaign: '4u',
       participation: {
@@ -25,35 +34,11 @@ export class LoginService {
       },
     };
 
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer fe7f60bab39cd8b46cc414d28adf7fff',
-      'Content-Type': 'application/json'
-    });
+    return this.http.post<LoginResponse>(this.apiUrl, data);
+}
 
-    return this.http.post<LoginResponse>(this.apiUrl, data, { headers });
-  }
-
-  islogged():boolean{
-    this.isLogged = true
-    return true
-  }
-
-  logout():boolean{
+  logout():void{
     localStorage.clear();
-    this.isLogged = false
-    return false
   }
 
-  signupInfo(): Observable<SignupInfoResponse> {
-    const data = {
-      api_key: 'fe7f60bab39cd8b46cc414d28adf7fff',
-      campaign: '4u'
-    };
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-
-    return this.http.post<SignupInfoResponse>(this.infoUrl, data, { headers });
-  }
 }

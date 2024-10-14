@@ -1,36 +1,51 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonCheckbox } from '@ionic/angular/standalone';
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonIcon,
+  IonCheckbox,
+} from '@ionic/angular/standalone';
 import { LoginService } from 'src/app/core/services/auth/login.service';
 import { Router } from '@angular/router';
-import { LoginResponse, SignupInfoResponse } from 'src/app/models/login.model';
+import { LoginResponse } from 'src/app/models/login.model';
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
-import { ButtonPrimaryComponent } from "../../../shared/components/btn/button-primary/button-primary.component";
-import { ChechboxComponent } from "../../../shared/components/chechbox/chechbox.component";
-
+import { ButtonPrimaryComponent } from '../../../shared/components/btn/button-primary/button-primary.component';
+import { ChechboxComponent } from '../../../shared/components/chechbox/chechbox.component';
+import { AlertCardViewComponent } from '../../../shared/components/alert-card-view/alert-card-view.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonCheckbox, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, LoaderComponent, ButtonPrimaryComponent, ChechboxComponent]
+  imports: [
+    IonCheckbox,
+    IonIcon,
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    CommonModule,
+    FormsModule,
+    LoaderComponent,
+    ButtonPrimaryComponent,
+    ChechboxComponent,
+    AlertCardViewComponent,
+  ],
 })
-export class LoginPage implements OnInit{
-
+export class LoginPage {
   isPasswordVisible: boolean = false;
-  username: string= '' ;
+  username: string = '';
   password: string = '';
-  isLoading= false;
+  isLoading: boolean = false;
+  showErroCard: boolean = false;
+  errorMessage: string = '';
 
-  constructor(
-    private loginService:LoginService,
-    private router:Router
-  ) { }
-  ngOnInit(): void {
-    this.callInfoLogin()
-  }
+  constructor(private loginService: LoginService, private router: Router) {}
 
   togglePasswordVisibility(): void {
     this.isPasswordVisible = !this.isPasswordVisible;
@@ -43,38 +58,36 @@ export class LoginPage implements OnInit{
   get isFormValid(): boolean {
     return this.isPasswordValid;
   }
-
-
-  callInfoLogin(){
-    this.loginService.signupInfo().subscribe({
-      next: (response: SignupInfoResponse) => {
-        console.log('Respuesta del servicio signupInfo:', response);
-      },
-      error: (error) => {
-        console.error('Error al llamar el servicio signupInfo:', error);
-      }
-    });
+  login() {
+    this.isLoading = true;
+    this.loginService
+      .login(this.username, this.password, true)
+      .subscribe({
+        next: (response: LoginResponse) => {
+          if (response.ok === 'true') {
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('distinct_id', this.username);
+            localStorage.setItem('isLogged', 'true');
+            this.username = '';
+            this.password = '';
+            this.isLoading = false;
+            this.router.navigate(['home']);
+          } else {
+            this.isLoading = false;
+            this.showErroCard = true;
+            this.errorMessage = response.message;
+          }
+        },
+        error: (error) => {
+          this.isLoading = false;
+          this.isLoading = false;
+          this.showErroCard = true;
+          this.errorMessage = error.error.message;
+        },
+      });
   }
 
-  login() {
-    this.isLoading = true
-    this.loginService.login(this.username, this.password).subscribe(
-      (response: LoginResponse) => {
-        this.username = '' ;
-        this.password = '';
-        console.log('Login exitoso:', response);
-        localStorage.setItem('isLogged', 'true');
-        this.isLoading = false
-        this.router.navigate(['home'])
-        // manejar el éxito, por ejemplo, almacenar el token
-      },
-      (error) => {
-        console.error('Error en el login:', error);
-        localStorage.setItem('isLogged', 'true');
-        this.isLoading = false
-        this.router.navigate(['home'])
-        // manejar el error, por ejemplo, mostrar un mensaje al usuario
-      }
-    );
+  closeCard() {
+    this.showErroCard = false;
   }
 }
