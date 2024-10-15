@@ -103,6 +103,7 @@ export class HomePage implements OnInit {
       }));
 
       this.showProgress = false
+      this.isLoading = false;
       this.progressBarMax = 0;
       this.progressBarCurrent = 0;
 
@@ -116,7 +117,7 @@ export class HomePage implements OnInit {
         this.progressBarCurrent += item.avance;
       });
       this.showProgress = true;
-      this.isLoading = false;
+      
     } catch (error) {
       this.isLoading = false;
       this.isLoading = false;
