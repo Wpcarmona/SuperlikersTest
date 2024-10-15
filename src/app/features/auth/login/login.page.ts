@@ -16,6 +16,7 @@ import { LoaderComponent } from 'src/app/shared/components/loader/loader.compone
 import { ButtonPrimaryComponent } from '../../../shared/components/btn/button-primary/button-primary.component';
 import { ChechboxComponent } from '../../../shared/components/chechbox/chechbox.component';
 import { AlertCardViewComponent } from '../../../shared/components/alert-card-view/alert-card-view.component';
+import { DarklyService } from 'src/app/core/services/featureflag/darklyflag.service';
 
 @Component({
   selector: 'app-login',
@@ -45,7 +46,11 @@ export class LoginPage {
   showErroCard: boolean = false;
   errorMessage: string = '';
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(
+    private loginService: LoginService, 
+    private router: Router,
+    private featureFlag: DarklyService,
+  ) {}
 
   togglePasswordVisibility(): void {
     this.isPasswordVisible = !this.isPasswordVisible;
@@ -60,35 +65,33 @@ export class LoginPage {
   }
   login() {
     this.isLoading = true;
-    this.loginService
-      .login(this.username, this.password)
-      .subscribe({
-        next: (response: LoginResponse) => {
-          if (response.ok === 'true') {
-            localStorage.setItem('token', response.token);
-            localStorage.setItem('distinct_id', this.username);
-            localStorage.setItem('isLogged', 'true');
-            this.username = '';
-            this.password = '';
-            this.isLoading = false;
-            this.router.navigate(['home']);
-          } else {
-            this.isLoading = false;
-            this.showErroCard = true;
-            this.errorMessage = response.message;
-          }
-        },
-        error: (error) => {
+    const featureFlag = this.featureFlag.getFlagValue()
+    this.loginService.login(this.username, this.password,featureFlag).subscribe({
+      next: (response: LoginResponse) => {
+        if (response.ok === 'true') {
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('distinct_id', this.username);
+          localStorage.setItem('isLogged', 'true');
+          this.username = '';
+          this.password = '';
           this.isLoading = false;
+          this.router.navigate(['home']);
+        } else {
           this.isLoading = false;
           this.showErroCard = true;
-          this.errorMessage = error.error.message;
-        },
-      });
+          this.errorMessage = response.message;
+        }
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.isLoading = false;
+        this.showErroCard = true;
+        this.errorMessage = error.error.message;
+      },
+    });
   }
 
   closeCard() {
     this.showErroCard = false;
   }
-  
 }

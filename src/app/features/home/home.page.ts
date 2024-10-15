@@ -19,6 +19,7 @@ import { LoaderComponent } from '../../shared/components/loader/loader.component
 import { KpiModelService } from 'src/app/core/models/kpi/kpi.models';
 import { NewEntry } from 'src/app/models/entries.model';
 import { SkeletonComponent } from '../../shared/components/skeleton/skeleton.component';
+import { DarklyService } from 'src/app/core/services/featureflag/darklyflag.service';
 
 @Component({
   selector: 'app-home',
@@ -56,7 +57,8 @@ export class HomePage implements OnInit {
     private localNotification: ScheduleNotificationsService,
     private pushNotification: PushNotificationService,
     private deviceService: DeviceService,
-    private modelKpiService: KpiModelService
+    private modelKpiService: KpiModelService,
+    private featureFlag: DarklyService,
   ) {}
 
   async ngOnInit() {
@@ -76,9 +78,10 @@ export class HomePage implements OnInit {
   async fetchEntries() {
     try {
       this.isLoading = true;
+      const featureFlag = this.featureFlag.getFlagValue()
       const resultado = await this.modelKpiService.consumePrintProcessedData(
         '12222222',
-        true
+        featureFlag
       );
       //  console.log('Resultado final:', resultado);
       this.entriesCartones = resultado.data.cartones.map((item) => ({
