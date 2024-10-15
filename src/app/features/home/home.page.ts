@@ -17,8 +17,8 @@ import { ProgresBarComponent } from '../../shared/components/progres-bar/progres
 import { DooughnutChartComponent } from '../../shared/components/dooughnut-chart/dooughnut-chart.component';
 import { LoaderComponent } from '../../shared/components/loader/loader.component';
 import { KpiModelService } from 'src/app/core/models/kpi/kpi.models';
-import {  NewEntry } from 'src/app/models/entries.model';
-import { SkeletonComponent } from "../../shared/components/skeleton/skeleton.component";
+import { NewEntry } from 'src/app/models/entries.model';
+import { SkeletonComponent } from '../../shared/components/skeleton/skeleton.component';
 
 @Component({
   selector: 'app-home',
@@ -38,82 +38,79 @@ import { SkeletonComponent } from "../../shared/components/skeleton/skeleton.com
     ProgresBarComponent,
     DooughnutChartComponent,
     LoaderComponent,
-    SkeletonComponent
-],
+    SkeletonComponent,
+  ],
 })
 export class HomePage implements OnInit {
   selectedButtonIndex: number = 1;
   selectedValue: string = 'Cartones';
   entriesCartones: NewEntry[] = [];
-  entriesHectolitros: NewEntry[] =[];
+  entriesHectolitros: NewEntry[] = [];
   progressBarMax: number = 100;
   progressBarCurrent: number = 10;
   isLoading: boolean = false;
   colors: string[] = ['#385cad', '#b1fdf3', '#ff8485', '#ff9015'];
-  color:string = "#385cad"
-  
+  color: string = '#385cad';
+
   constructor(
     private localNotification: ScheduleNotificationsService,
     private pushNotification: PushNotificationService,
     private deviceService: DeviceService,
-    private modelKpiService: KpiModelService,
+    private modelKpiService: KpiModelService
   ) {}
 
   async ngOnInit() {
-    this.fetchEntries()
+    this.fetchEntries();
     const isIOS = await this.deviceService.isIOS();
     if (isIOS) {
       this.localNotification.initializeNotifications();
     } else {
       this.pushNotification.initializePushNotificationsDoc();
     }
-    
   }
 
   onSelectionChange(value: string): void {
     this.selectedValue = value;
   }
 
-
   async fetchEntries() {
     try {
-      const resultado = await this.modelKpiService.consumePrintProcessedData('12222222',true);
+      this.isLoading = true;
+      const resultado = await this.modelKpiService.consumePrintProcessedData(
+        '12222222',
+        true
+      );
       //  console.log('Resultado final:', resultado);
-      this.entriesCartones = resultado.data.cartones.map(item => ({
-        name: item.name, 
-        avance: Number(item['avance']) || 0, 
-        meta: Number(item['meta']) || 0      
+      this.entriesCartones = resultado.data.cartones.map((item) => ({
+        name: item.name,
+        avance: Number(item['avance']) || 0,
+        meta: Number(item['meta']) || 0,
       }));
-     this.entriesHectolitros = resultado.data.hectolitros.map(item => ({
-      name: item.name, 
-      avance: Number(item['avance']) || 0,
-      meta: Number(item['meta']) || 0
-    }));
+      this.entriesHectolitros = resultado.data.hectolitros.map((item) => ({
+        name: item.name,
+        avance: Number(item['avance']) || 0,
+        meta: Number(item['meta']) || 0,
+      }));
 
-    this.progressBarMax = 0;
-    this.progressBarCurrent = 0;
+      this.progressBarMax = 0;
+      this.progressBarCurrent = 0;
 
-    this.entriesCartones.forEach(item => {
-      this.progressBarMax += item.meta;
-      this.progressBarCurrent += item.avance;
-    });
+      this.entriesCartones.forEach((item) => {
+        this.progressBarMax += item.meta;
+        this.progressBarCurrent += item.avance;
+      });
 
-    this.entriesHectolitros.forEach(item => {
-      this.progressBarMax += item.meta;
-      this.progressBarCurrent += item.avance;
-    });
-
-
+      this.entriesHectolitros.forEach((item) => {
+        this.progressBarMax += item.meta;
+        this.progressBarCurrent += item.avance;
+      });
+      this.isLoading = false;
     } catch (error) {
       console.error('Error al consumir los datos:', error);
     }
   }
 
   getColor(index: number): string {
-    return this.colors[index % this.colors.length]; 
+    return this.colors[index % this.colors.length];
   }
-
- 
-
-
 }
