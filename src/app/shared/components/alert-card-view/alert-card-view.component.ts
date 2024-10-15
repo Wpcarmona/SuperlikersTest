@@ -11,7 +11,7 @@ export class AlertCardViewComponent {
   @Output() closeCard = new EventEmitter<void>(); 
 
   title: string = 'Error';
-  @Input() message: string = '';
+  @Input() message: string = 'Lo sentimos intente en otro momento';
   @Input() showCard: boolean = false;
 
   onClose() {

@@ -20,6 +20,8 @@ import { KpiModelService } from 'src/app/core/models/kpi/kpi.models';
 import { NewEntry } from 'src/app/models/entries.model';
 import { SkeletonComponent } from '../../shared/components/skeleton/skeleton.component';
 import { DarklyService } from 'src/app/core/services/featureflag/darklyflag.service';
+import { AlertCardViewComponent } from "../../shared/components/alert-card-view/alert-card-view.component";
+import { LoginUtilsService } from 'src/app/core/utils/auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -40,7 +42,8 @@ import { DarklyService } from 'src/app/core/services/featureflag/darklyflag.serv
     DooughnutChartComponent,
     LoaderComponent,
     SkeletonComponent,
-  ],
+    AlertCardViewComponent
+],
 })
 export class HomePage implements OnInit {
   selectedButtonIndex: number = 1;
@@ -48,10 +51,12 @@ export class HomePage implements OnInit {
   entriesCartones: NewEntry[] = [];
   entriesHectolitros: NewEntry[] = [];
   progressBarMax: number = 100;
-  progressBarCurrent: number = 10;
+  progressBarCurrent: number = 0;
   isLoading: boolean = false;
   colors: string[] = ['#385cad', '#b1fdf3', '#ff8485', '#ff9015'];
   color: string = '#385cad';
+  showErroCard: boolean = false;
+  errorMessage: string = '';
 
   constructor(
     private localNotification: ScheduleNotificationsService,
@@ -59,6 +64,7 @@ export class HomePage implements OnInit {
     private deviceService: DeviceService,
     private modelKpiService: KpiModelService,
     private featureFlag: DarklyService,
+    private authUtilService: LoginUtilsService
   ) {}
 
   async ngOnInit() {
@@ -109,11 +115,27 @@ export class HomePage implements OnInit {
       });
       this.isLoading = false;
     } catch (error) {
-      console.error('Error al consumir los datos:', error);
+      this.isLoading = false;
+      this.isLoading = false;
+      this.showErroCard = true;
+      if (error instanceof Error) {
+        this.errorMessage =
+          error.message === 'Network Error'
+            ? 'Lo sentimos, tenemos inconvenientes. Trata en otro momento.'
+            : error.message;
+      } else {
+        this.errorMessage = 'Lo sentimos, tenemos inconvenientes. Intenta en otro momento.';
+      }
+      console.log('Errorpp:', error);
     }
   }
 
   getColor(index: number): string {
     return this.colors[index % this.colors.length];
+  }
+
+  closeCard() {
+    this.showErroCard = false;
+    this.authUtilService.logoutNavigate()
   }
 }

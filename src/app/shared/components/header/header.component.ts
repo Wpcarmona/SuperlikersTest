@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
 
   logout(){
     this.authServies.logout()
-    this.router.navigate(['login'])
+    this.router.navigate(['login'],{ replaceUrl: true })
   }
 
   

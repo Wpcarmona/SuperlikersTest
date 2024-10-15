@@ -47,9 +47,9 @@ export class LoginPage {
   errorMessage: string = '';
 
   constructor(
-    private loginService: LoginService, 
+    private loginService: LoginService,
     private router: Router,
-    private featureFlag: DarklyService,
+    private featureFlag: DarklyService
   ) {}
 
   togglePasswordVisibility(): void {
@@ -65,30 +65,35 @@ export class LoginPage {
   }
   login() {
     this.isLoading = true;
-    const featureFlag = this.featureFlag.getFlagValue()
-    this.loginService.login(this.username, this.password,featureFlag).subscribe({
-      next: (response: LoginResponse) => {
-        if (response.ok === 'true') {
-          localStorage.setItem('token', response.token);
-          localStorage.setItem('distinct_id', this.username);
-          localStorage.setItem('isLogged', 'true');
-          this.username = '';
-          this.password = '';
+    const featureFlag = this.featureFlag.getFlagValue();
+    this.loginService
+      .login(this.username, this.password, featureFlag)
+      .subscribe({
+        next: (response: LoginResponse) => {
+          if (response.ok === 'true') {
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('distinct_id', this.username);
+            localStorage.setItem('isLogged', 'true');
+            this.username = '';
+            this.password = '';
+            this.isLoading = false;
+            this.router.navigate(['home'],{ replaceUrl: true });
+          } else {
+            this.isLoading = false;
+            this.showErroCard = true;
+            this.errorMessage = response.message;
+          }
+        },
+        error: (error) => {
           this.isLoading = false;
-          this.router.navigate(['home']);
-        } else {
           this.isLoading = false;
           this.showErroCard = true;
-          this.errorMessage = response.message;
-        }
-      },
-      error: (error) => {
-        this.isLoading = false;
-        this.isLoading = false;
-        this.showErroCard = true;
-        this.errorMessage = error.error.message;
-      },
-    });
+          this.errorMessage =
+            error.message === 'Network Error'
+              ? 'Lo sentimos, tenemos inconvenientes. Trata en otro momento.'
+              : error.message;
+        },
+      });
   }
 
   closeCard() {
