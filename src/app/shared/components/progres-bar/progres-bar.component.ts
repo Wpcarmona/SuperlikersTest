@@ -21,6 +21,7 @@ export class ProgresBarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log('actual',this.current,'max',this.max)
     setTimeout(() => {
       this.updateProgress();
     }, 100); 

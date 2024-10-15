@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class KpiService {
-  private readonly apiUrl = `${environment.BASE_URL}/v1/entries/index`;
+  private readonly apiUrl = `${environment.BASE_URL_ONRAIL}/api/entries/entries`;
 
   constructor() {}
 
@@ -23,7 +23,7 @@ export class KpiService {
 
     const requestData: EntriesRequest = {
       api_key: environment.API_KEY,
-      campaign: 'u4',
+      campaign: '4u',
       date_filter: {
         sdate: "2024-08-01",
         edate: "2024-08-31"

@@ -57,6 +57,7 @@ export class HomePage implements OnInit {
   color: string = '#385cad';
   showErroCard: boolean = false;
   errorMessage: string = '';
+  showProgress:boolean = false;
 
   constructor(
     private localNotification: ScheduleNotificationsService,
@@ -101,6 +102,7 @@ export class HomePage implements OnInit {
         meta: Number(item['meta']) || 0,
       }));
 
+      this.showProgress = false
       this.progressBarMax = 0;
       this.progressBarCurrent = 0;
 
@@ -113,6 +115,8 @@ export class HomePage implements OnInit {
         this.progressBarMax += item.meta;
         this.progressBarCurrent += item.avance;
       });
+      this.showProgress = true;
+      console.log('progress',this.progressBarMax, 'current', this.progressBarCurrent)
       this.isLoading = false;
     } catch (error) {
       this.isLoading = false;

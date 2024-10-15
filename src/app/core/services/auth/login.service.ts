@@ -9,7 +9,7 @@ import { DUMMY_LOGIN_ERROR_RESPONSE, DUMMY_LOGIN_RESPONSE } from 'src/utils/dumm
   providedIn: 'root'
 })
 export class LoginService {
-  private readonly apiUrl = `${environment.BASE_URL}/v1/microsite/sessions`;
+  private readonly apiURL = `${environment.BASE_URL_ONRAIL}/api/sessions/session` 
 
   constructor() {}
 
@@ -30,7 +30,7 @@ export class LoginService {
     };
 
     return new Observable<LoginResponse>((observer) => {
-      axios.post<LoginResponse>(this.apiUrl, data)
+      axios.post<LoginResponse>(this.apiURL, data)
         .then(response => {
           observer.next(response.data);
           observer.complete();
