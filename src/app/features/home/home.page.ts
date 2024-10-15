@@ -116,7 +116,6 @@ export class HomePage implements OnInit {
         this.progressBarCurrent += item.avance;
       });
       this.showProgress = true;
-      console.log('progress',this.progressBarMax, 'current', this.progressBarCurrent)
       this.isLoading = false;
     } catch (error) {
       this.isLoading = false;
