@@ -36,6 +36,9 @@
       <div class="align-right">
         <app-select-list (selectionChange)="onSelectionChange($event)" />
       </div>
+      @if (showChart) {
+        <app-skeleton-charts/>
+      } @else {
       <div class="content-graph">
         <div
           [class.show]="selectedValue === 'Cartones'"
@@ -74,6 +77,7 @@
           </div>
         </div>
       </div>
+    }
     </div>
   </div>
 </ion-content>

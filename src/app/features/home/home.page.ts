@@ -22,6 +22,7 @@ import { SkeletonComponent } from '../../shared/components/skeleton/skeleton.com
 import { DarklyService } from 'src/app/core/services/featureflag/darklyflag.service';
 import { AlertCardViewComponent } from "../../shared/components/alert-card-view/alert-card-view.component";
 import { LoginUtilsService } from 'src/app/core/utils/auth/auth.service';
+import { SkeletonChartsComponent } from "../../shared/components/skeleton-charts/skeleton-charts.component";
 
 @Component({
   selector: 'app-home',
@@ -42,7 +43,8 @@ import { LoginUtilsService } from 'src/app/core/utils/auth/auth.service';
     DooughnutChartComponent,
     LoaderComponent,
     SkeletonComponent,
-    AlertCardViewComponent
+    AlertCardViewComponent,
+    SkeletonChartsComponent
 ],
 })
 export class HomePage implements OnInit {
@@ -58,6 +60,7 @@ export class HomePage implements OnInit {
   showErroCard: boolean = false;
   errorMessage: string = '';
   showProgress:boolean = false;
+  showChart:boolean = false
 
   constructor(
     private localNotification: ScheduleNotificationsService,
@@ -84,7 +87,7 @@ export class HomePage implements OnInit {
 
   async fetchEntries() {
     try {
-      this.isLoading = true;
+      this.showChart = true;
       const featureFlag = this.featureFlag.getFlagValue()
       const resultado = await this.modelKpiService.consumePrintProcessedData(
         '12222222',
@@ -103,7 +106,7 @@ export class HomePage implements OnInit {
       }));
 
       this.showProgress = false
-      this.isLoading = false;
+      this.showChart = false;
       this.progressBarMax = 0;
       this.progressBarCurrent = 0;
 
