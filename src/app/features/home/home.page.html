@@ -32,29 +32,42 @@
         <app-select-list (selectionChange)="onSelectionChange($event)" />
       </div>
       <div class="content-graph">
-        @if(selectedValue === "Cartones"){ @for (entriesCarton of
-        entriesCartones; track $index) {
-        <div>
-          <app-dooughnut-chart
-            [label]="entriesCarton.name"
-            [max]="entriesCarton.meta"
-            [actual]="entriesCarton.avance"
-            [index]="$index"
-            [color]="getColor($index)"
-          />
+        <div
+          [class.show]="selectedValue === 'Cartones'"
+          [class.hide]="selectedValue !== 'Cartones'"
+        >
+          <div class="display-flex">
+            @for (entriesCarton of entriesCartones; track $index) {
+            <div>
+              <app-dooughnut-chart
+                [label]="entriesCarton.name"
+                [max]="entriesCarton.meta"
+                [actual]="entriesCarton.avance"
+                [index]="$index"
+                [color]="getColor($index)"
+              />
+            </div>
+            }
+          </div>
         </div>
-        } } @else { @for (entriesHectolitro of entriesHectolitros; track $index)
-        {
-        <div>
-          <app-dooughnut-chart
-            [label]="entriesHectolitro.name"
-            [max]="entriesHectolitro.meta"
-            [actual]="entriesHectolitro.avance"
-            [index]="$index"
-            [color]="getColor($index)"
-          />
+        <div
+          [class.show]="selectedValue === 'Hectolitros'"
+          [class.hide]="selectedValue !== 'Hectolitros'"
+        >
+          <div class="display-flex">
+            @for (entriesHectolitro of entriesHectolitros; track $index) {
+            <div>
+              <app-dooughnut-chart
+                [label]="entriesHectolitro.name"
+                [max]="entriesHectolitro.meta"
+                [actual]="entriesHectolitro.avance"
+                [index]="$index"
+                [color]="getColor($index)"
+              />
+            </div>
+            }
+          </div>
         </div>
-        } }
       </div>
     </div>
   </div>
