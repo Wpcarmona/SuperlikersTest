@@ -26,7 +26,16 @@
         </div>
       </div>
 
-      <app-progres-bar [max]="progressBarMax" [current]="progressBarCurrent" />
+      <div [class.show]="progressBarMax === 0"
+           [class.hide]="progressBarMax !== 0"
+      >
+        <app-skeleton/>
+      </div>
+      <div [class.show]="progressBarMax !== 0"
+           [class.hide]="progressBarMax === 0"
+      >
+        <app-progres-bar [max]="progressBarMax" [current]="progressBarCurrent" />
+      </div>
 
       <div class="align-right">
         <app-select-list (selectionChange)="onSelectionChange($event)" />

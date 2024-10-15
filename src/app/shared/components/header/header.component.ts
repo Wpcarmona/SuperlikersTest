@@ -27,6 +27,8 @@ export class HeaderComponent implements OnInit {
     const deviceType = await this.deviceService.checkDeviceType();
     if (deviceType == "iosnotch") {
       this.headerClass = 'profile-header-notch';
+    }else if (deviceType == 'ios'){
+      this.headerClass = 'profile-header-ios'
     }
   }
 

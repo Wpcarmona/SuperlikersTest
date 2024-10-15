@@ -61,7 +61,7 @@ export class LoginPage {
   login() {
     this.isLoading = true;
     this.loginService
-      .login(this.username, this.password, true)
+      .login(this.username, this.password,true)
       .subscribe({
         next: (response: LoginResponse) => {
           if (response.ok === 'true') {

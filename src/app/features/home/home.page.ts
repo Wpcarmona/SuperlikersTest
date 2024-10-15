@@ -18,6 +18,7 @@ import { DooughnutChartComponent } from '../../shared/components/dooughnut-chart
 import { LoaderComponent } from '../../shared/components/loader/loader.component';
 import { KpiModelService } from 'src/app/core/models/kpi/kpi.models';
 import {  NewEntry } from 'src/app/models/entries.model';
+import { SkeletonComponent } from "../../shared/components/skeleton/skeleton.component";
 
 @Component({
   selector: 'app-home',
@@ -37,7 +38,8 @@ import {  NewEntry } from 'src/app/models/entries.model';
     ProgresBarComponent,
     DooughnutChartComponent,
     LoaderComponent,
-  ],
+    SkeletonComponent
+],
 })
 export class HomePage implements OnInit {
   selectedButtonIndex: number = 1;
@@ -46,10 +48,6 @@ export class HomePage implements OnInit {
   entriesHectolitros: NewEntry[] =[];
   progressBarMax: number = 100;
   progressBarCurrent: number = 10;
-  percentaje1: number = 80;
-  percentaje2: number = 29;
-  percentaje3: number = 46;
-  percentaje4: number = 10;
   isLoading: boolean = false;
   colors: string[] = ['#385cad', '#b1fdf3', '#ff8485', '#ff9015'];
   color:string = "#385cad"
@@ -95,7 +93,6 @@ export class HomePage implements OnInit {
     this.progressBarMax = 0;
     this.progressBarCurrent = 0;
 
-    // Calcular el total de metas (progressBarMax) y avances (progressBarCurrent)
     this.entriesCartones.forEach(item => {
       this.progressBarMax += item.meta;
       this.progressBarCurrent += item.avance;
@@ -106,7 +103,6 @@ export class HomePage implements OnInit {
       this.progressBarCurrent += item.avance;
     });
 
-    console.log(this.progressBarCurrent, this.progressBarMax)
 
     } catch (error) {
       console.error('Error al consumir los datos:', error);
